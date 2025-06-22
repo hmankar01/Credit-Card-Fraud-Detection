@@ -26,7 +26,7 @@
 
 1.  **Clone the repository:**
     ```bash
-    git clone [your-repository-url]
+    git clone https://github.com/hmankar01/Credit-Card-Fraud-Detection
     ```
 2.  **Create a virtual environment and install dependencies:**
     ```bash
@@ -35,5 +35,5 @@
     pip install -r requirements.txt
     ```
 3.  **Run the Jupyter Notebook:**
-    Launch Jupyter and open the `[your-notebook-name].ipynb` file to see the full analysis and code.
+    Launch Jupyter and open the `Credit_Fraud_analysis_.ipynb` file to see the full analysis and code.
     
