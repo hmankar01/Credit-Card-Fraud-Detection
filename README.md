@@ -40,7 +40,7 @@
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/hmankar01/Credit-Card-Fraud-Detection](https://github.com/hmankar01/Credit-Card-Fraud-Detection)
+    git clone https://github.com/hmankar01/Credit-Card-Fraud-Detection.git
     ```
 2.  **Create a virtual environment and install dependencies:**
     ```bash
