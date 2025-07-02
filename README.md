@@ -1,52 +1,86 @@
-# Credit Card Fraud Detection
+# Credit Card Fraud Detection 💳
 
-## Project Overview
+This repository contains an end-to-end machine learning project for detecting fraudulent credit card transactions. The pipeline covers everything from data cleaning and feature engineering to model training, evaluation, and tuning, culminating in a high-precision classification model ready for a business context.
 
-*This project is a comprehensive, end-to-end machine learning pipeline for detecting fraudulent credit card transactions. It uses a real-world dataset to demonstrate skills in data cleaning, exploratory data analysis, advanced feature engineering, and comparative model evaluation. The final model is a high-precision classifier capable of identifying fraudulent transactions while minimizing false alarms.*
+***
 
-## Key Features & Methodology
+## 📋 Table of Contents
+- [Project Overview](#-project-overview)
+- [Key Features](#-key-features)
+- [Technologies Used](#-technologies-used)
+- [The Machine Learning Pipeline](#-the-machine-learning-pipeline)
+- [Results & Conclusion](#-results--conclusion)
+- [How to Run This Project](#-how-to-run-this-project)
 
-* **Data Cleaning:** Handled missing values, duplicates, and incorrect data types.
-* **Exploratory Data Analysis (EDA):** Performed deep analysis on transaction patterns, time-based trends, and class imbalance. Visualizations from the EDA phase revealed key insights into the data's structure and the nature of the transactions.
+***
 
-    ![Exploratory Data Analysis Chart 1](EDA.png)
-    ![Exploratory Data Analysis Chart 2](EDA1.png)
+## 🚀 Project Overview
 
-    *The distribution of transaction amounts was heavily skewed, so a log transformation was applied to normalize it for better modeling performance.*
+The goal of this project is to develop a highly accurate and reliable model to identify fraudulent credit card transactions. Using a real-world dataset, the project demonstrates a complete machine learning workflow. The final model, **CatBoost**, achieves **80% precision** on the validation set, making it highly effective for minimizing false alarms and allowing a fraud investigation team to focus on high-confidence alerts.
 
-    ![Log Distribution of Transaction Amounts](Log_distribution.png)
+## ✨ Key Features
 
-* **Advanced Feature Engineering:** Created sophisticated features, including:
-    * Flags for legitimate reversals and multi-swipe transactions.
-    * Time-based features like account age and days to card expiration.
-    * Financial ratios and log-transformations.
-* **Preprocessing Pipeline:** Utilized a robust pipeline with Target Encoding for high-cardinality features, `RobustScaler` to handle outliers, and **SMOTE** to address severe class imbalance on the training data only.
-* **Model Training & Tuning:** Comparatively trained and tuned three models: Logistic Regression (baseline), XGBoost, and CatBoost using `RandomizedSearchCV`.
-* **Advanced Evaluation:** Implemented a custom `ModelEvaluator` class to find the optimal decision threshold for each model, ensuring performance is measured based on the F1-Score, not an arbitrary default.
+* **Advanced Feature Engineering:** Creation of sophisticated features like account age, time-based patterns, and financial ratios.
+* **Robust Preprocessing:** A custom pipeline that includes `Target Encoding` for categorical features, `RobustScaler` to handle outliers, and `SMOTE` to correct for severe class imbalance.
+* **Comparative Model Analysis:** In-depth training and tuning of Logistic Regression, XGBoost, and CatBoost models.
+* **Threshold Tuning:** A custom evaluation class was used to find the optimal decision threshold based on the F1-score, moving beyond default settings to maximize model performance in a real-world scenario.
 
-## Key Results & Conclusion
+## 🛠️ Technologies Used
 
-* The analysis showed a clear trade-off between models that have high recall (catching more fraud but with many false alarms) and models with high precision (more reliable alerts). The visualization below supported the initial hypothesis.
+* **Python 3.x**
+* **Pandas & NumPy:** For data manipulation and numerical operations.
+* **Scikit-learn:** For preprocessing, modeling, and evaluation.
+* **XGBoost & CatBoost:** For advanced gradient boosting models.
+* **Matplotlib & Seaborn:** For data visualization.
+* **Jupyter Notebook:** For analysis and code development.
 
-    ![Hypothesis Visualization](Hypothesis.png)
+***
 
-* The final champion model, **CatBoost**, was selected due to its outstanding **Precision of 80%** on the validation set after threshold tuning. The confusion matrix below demonstrates the model's performance in distinguishing between classes.
+## ⚙️ The Machine Learning Pipeline
 
-    ![Confusion Matrix for the Final Model](Confusion_Matrix.png)
+### 1. Exploratory Data Analysis (EDA)
 
-* This high-precision model is ideal for a real-world business scenario, as it provides high-confidence alerts that can be efficiently actioned by a fraud investigation team.
+A deep dive into the dataset revealed key transaction patterns, time-based trends, and a severe class imbalance. The distribution of transaction amounts was heavily skewed, requiring a log transformation to normalize it for better modeling performance.
 
-## How to Use This Repository
+![EDA Charts](EDA.png)
+![Log Distribution of Transaction Amounts](Log_distribution.png)
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/hmankar01/Credit-Card-Fraud-Detection.git
-    ```
-2.  **Create a virtual environment and install dependencies:**
-    ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
-    pip install -r requirements.txt
-    ```
-3.  **Run the Jupyter Notebook:**
-    Launch Jupyter and open the `Credit_Fraud_analysis_.ipynb` file to see the full analysis and code.
+### 2. Feature Engineering & Preprocessing
+
+Created new, impactful features and built a robust preprocessing pipeline to prepare the data for modeling. This included:
+* Flags for suspicious activities like multi-swipes.
+* Time-based features such as account age and days to card expiration.
+* A `ColumnTransformer` pipeline with `RobustScaler` for numerical features and `TargetEncoder` for high-cardinality categorical features.
+* Application of **SMOTE** to the training data to handle the severe class imbalance.
+
+### 3. Model Training and Tuning
+
+Three models were trained and evaluated:
+1.  **Logistic Regression** (Baseline)
+2.  **XGBoost**
+3.  **CatBoost**
+
+Each model was tuned using `RandomizedSearchCV` to find the optimal hyperparameters.
+
+***
+
+## 📈 Results & Conclusion
+
+The final analysis highlighted a trade-off between precision and recall. While some models could catch more fraud (high recall), they did so at the cost of many false alarms.
+
+![Hypothesis Visualization](Hypothesis.png)
+
+The champion model, **CatBoost**, was selected for its outstanding **precision of 80%** after threshold tuning. This means that 4 out of 5 transactions flagged by the model are indeed fraudulent, providing a high-confidence alert system for business use. The confusion matrix below illustrates its strong performance.
+
+![Final Model Confusion Matrix](Confusion_Matrix.png)
+
+This high-precision model is ideal for real-world deployment, as it ensures that the fraud investigation team's time is spent on legitimate alerts.
+
+***
+
+## 🚀 How to Run This Project
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/hmankar01/Credit-Card-Fraud-Detection.git](https://github.com/hmankar01/Credit-Card-Fraud-Detection.git)
+cd Credit-Card-Fraud-Detection
