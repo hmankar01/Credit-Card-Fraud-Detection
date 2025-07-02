@@ -1,86 +1,123 @@
 # Credit Card Fraud Detection 💳
 
-This repository contains an end-to-end machine learning project for detecting fraudulent credit card transactions. The pipeline covers everything from data cleaning and feature engineering to model training, evaluation, and tuning, culminating in a high-precision classification model ready for a business context.
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-***
-
-## 📋 Table of Contents
-- [Project Overview](#-project-overview)
-- [Key Features](#-key-features)
-- [Technologies Used](#-technologies-used)
-- [The Machine Learning Pipeline](#-the-machine-learning-pipeline)
-- [Results & Conclusion](#-results--conclusion)
-- [How to Run This Project](#-how-to-run-this-project)
-
-***
+This repository showcases an end-to-end machine learning project for detecting fraudulent credit card transactions. The project implements a complete data science workflow, from exploratory data analysis and advanced feature engineering to model tuning and evaluation. The result is a high-precision **CatBoost** model optimized for real-world business applications.
 
 ## 🚀 Project Overview
 
-The goal of this project is to develop a highly accurate and reliable model to identify fraudulent credit card transactions. Using a real-world dataset, the project demonstrates a complete machine learning workflow. The final model, **CatBoost**, achieves **80% precision** on the validation set, making it highly effective for minimizing false alarms and allowing a fraud investigation team to focus on high-confidence alerts.
+The primary objective of this project was to develop a highly accurate and reliable model to identify fraudulent credit card transactions using a real-world dataset from **Capital One's Repository**. The final **CatBoost** model achieves **80% precision** on the validation set. This level of precision is crucial in a business context, as it minimizes false positives and enables a fraud investigation team to focus its efforts on high-confidence alerts.
+
+***
 
 ## ✨ Key Features
 
-* **Advanced Feature Engineering:** Creation of sophisticated features like account age, time-based patterns, and financial ratios.
-* **Robust Preprocessing:** A custom pipeline that includes `Target Encoding` for categorical features, `RobustScaler` to handle outliers, and `SMOTE` to correct for severe class imbalance.
-* **Comparative Model Analysis:** In-depth training and tuning of Logistic Regression, XGBoost, and CatBoost models.
-* **Threshold Tuning:** A custom evaluation class was used to find the optimal decision threshold based on the F1-score, moving beyond default settings to maximize model performance in a real-world scenario.
+* **Advanced Feature Engineering:** Developed sophisticated features including account tenure, time-based transaction patterns, and key financial ratios to capture complex fraudulent behaviors.
+* **Robust Preprocessing Pipeline:** Implemented a custom `ColumnTransformer` pipeline that combines `TargetEncoding` for high-cardinality categorical features and `RobustScaler` to effectively handle outliers in numerical data.
+* **Class Imbalance Handling:** Utilized the **SMOTE** (Synthetic Minority Over-sampling Technique) to address the severe class imbalance in the training data, ensuring the model learns to identify rare fraud cases.
+* **Comparative Model Analysis:** Conducted in-depth training and hyperparameter tuning for Logistic Regression (Baseline), XGBoost, and CatBoost to identify the best-performing algorithm.
+* **Optimized Decision Threshold:** Moved beyond the default 0.5 threshold by tuning the model's decision point to maximize the F1-score, striking an optimal balance between precision and recall for the business problem.
 
-## 🛠️ Technologies Used
+***
 
-* **Python 3.x**
-* **Pandas & NumPy:** For data manipulation and numerical operations.
-* **Scikit-learn:** For preprocessing, modeling, and evaluation.
-* **XGBoost & CatBoost:** For advanced gradient boosting models.
-* **Matplotlib & Seaborn:** For data visualization.
-* **Jupyter Notebook:** For analysis and code development.
+## 🛠️ Technology Stack
+
+* **Core Libraries:** Python 3.x, Pandas, NumPy
+* **Machine Learning:** Scikit-learn, XGBoost, CatBoost
+* **Data Visualization:** Matplotlib, Seaborn
+* **Development Environment:** Jupyter Notebook
 
 ***
 
 ## ⚙️ The Machine Learning Pipeline
 
 ### 1. Exploratory Data Analysis (EDA)
-
-A deep dive into the dataset revealed key transaction patterns, time-based trends, and a severe class imbalance. The distribution of transaction amounts was heavily skewed, requiring a log transformation to normalize it for better modeling performance.
+A thorough EDA revealed crucial insights, including a severe class imbalance and a heavily skewed distribution of transaction amounts. Log transformation was applied to normalize the transaction data, which significantly improved modeling performance.
 
 ![EDA Charts](EDA.png)
 ![Log Distribution of Transaction Amounts](Log_distribution.png)
 
 ### 2. Feature Engineering & Preprocessing
-
-Created new, impactful features and built a robust preprocessing pipeline to prepare the data for modeling. This included:
-* Flags for suspicious activities like multi-swipes.
-* Time-based features such as account age and days to card expiration.
-* A `ColumnTransformer` pipeline with `RobustScaler` for numerical features and `TargetEncoder` for high-cardinality categorical features.
-* Application of **SMOTE** to the training data to handle the severe class imbalance.
+This stage focused on creating high-impact features and preparing the data for modeling. Key steps included:
+* Creating flags for suspicious activities like rapid multi-swipes.
+* Engineering time-based features such as account age and days until card expiration.
+* Applying **SMOTE** to the training data to generate synthetic samples of the minority (fraud) class.
 
 ### 3. Model Training and Tuning
-
-Three models were trained and evaluated:
-1.  **Logistic Regression** (Baseline)
+Three powerful classification models were trained and systematically evaluated:
+1.  **Logistic Regression** (as a baseline)
 2.  **XGBoost**
 3.  **CatBoost**
 
-Each model was tuned using `RandomizedSearchCV` to find the optimal hyperparameters.
+Each model's hyperparameters were fine-tuned using `RandomizedSearchCV` with cross-validation to optimize performance.
 
 ***
 
-## 📈 Results & Conclusion
+## 📈 Results and Business Impact
 
-The final analysis highlighted a trade-off between precision and recall. While some models could catch more fraud (high recall), they did so at the cost of many false alarms.
+The final analysis revealed a clear trade-off between precision and recall. While some models could identify a higher number of fraud cases (high recall), they generated too many false alarms, which is inefficient for a business.
 
 ![Hypothesis Visualization](Hypothesis.png)
 
-The champion model, **CatBoost**, was selected for its outstanding **precision of 80%** after threshold tuning. This means that 4 out of 5 transactions flagged by the model are indeed fraudulent, providing a high-confidence alert system for business use. The confusion matrix below illustrates its strong performance.
+The champion model, **CatBoost**, was selected for its exceptional **precision of 80%** after threshold tuning. This means that **4 out of 5 transactions flagged by the model are genuinely fraudulent**. Such high precision provides a reliable, high-confidence alert system that allows a fraud investigation team to work efficiently and minimize losses.
+
+The confusion matrix below visualizes the final model's strong performance on the test set.
 
 ![Final Model Confusion Matrix](Confusion_Matrix.png)
 
-This high-precision model is ideal for real-world deployment, as it ensures that the fraud investigation team's time is spent on legitimate alerts.
-
 ***
 
-## 🚀 How to Run This Project
+## 🚀 Getting Started
+
+Follow these steps to set up and run the project on your local machine.
+
+### Prerequisites
+* [Git](https://git-scm.com/)
+* [Python 3.8+](https://www.python.org/downloads/)
 
 ### 1. Clone the Repository
+Open your terminal and run the following commands to download the project and navigate into its directory.
 ```bash
-git clone [https://github.com/hmankar01/Credit-Card-Fraud-Detection.git](https://github.com/hmankar01/Credit-Card-Fraud-Detection.git)
+# Clone the repository
+git clone https://github.com/hmankar01/Credit-Card-Fraud-Detection.git
+```
+### Navigate into the project directory
+```bash
 cd Credit-Card-Fraud-Detection
+```
+### 2. Create and Activate a Virtual Environment ⚙️
+This creates an isolated environment for the project's dependencies.
+
+**On macOS/Linux:**
+```bash
+# Create a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate
+```
+**On Windows:**
+```bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+venv\Scripts\activate
+```
+### 3. Install Required Libraries 📦
+This command installs all the necessary Python packages listed in the requirements.txt file.
+```Bash
+pip install -r requirements.txt
+```
+### 4. Launch the Jupyter Notebook 🚀
+Now you can start the Jupyter environment to view and run the analysis notebook.
+```bash
+jupyter notebook
+```
+A new tab will open in your browser. From there, click on the Credit_Fraud_analysis_.ipynb file to get started.
+
+### 📫 Contact Me
+Harsh Mankar- harshrajendramankar@gmail.com | https://www.linkedin.com/in/hmankar01/
+
+Project Link: https://github.com/hmankar01/Credit-Card-Fraud-Detection.git
+
